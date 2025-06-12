@@ -33,15 +33,15 @@ app = Flask(__name__)
 def query_postgres():
     try:
         # Aquí puedes poner cualquier query
-        sql = '''
-         SELECT 
-         COUNT(CASE WHEN is_lost = false AND owner_id IS NOT NULL THEN 1 END) AS total_online, 
-         COUNT(CASE WHEN is_lost = true AND lost_date IS NOT NULL AND owner_id IS NOT NULL THEN 1 END) AS total_lost 
-         FROM leads_client lc
-         inner join core_cohort cc 
-         on lc.uuid = cc.client_id
-         and cc.is_last = '1
-         '''
+        sql = """
+            SELECT 
+                COUNT(CASE WHEN is_lost = false AND owner_id IS NOT NULL THEN 1 END) AS total_online, 
+                COUNT(CASE WHEN is_lost = true AND lost_date IS NOT NULL AND owner_id IS NOT NULL THEN 1 END) AS total_lost 
+            FROM leads_client lc
+            INNER JOIN core_cohort cc 
+                ON lc.uuid = cc.client_id
+                AND cc.is_last = '1'
+        """
 
         # Ejecutar el query usando pandas
         df = pd.read_sql(sql, engine)
