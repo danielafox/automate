@@ -68,7 +68,7 @@ select
     count(case when is_lost is true and lost_date is not null then 1 end) as total_lost
 from base_data
 group by cohort
-order by cohort;
+order by cohort
          '''
 
         # Ejecutar el query usando pandas
