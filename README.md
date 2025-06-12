@@ -1,0 +1,2 @@
+# automate
+querys for automate
